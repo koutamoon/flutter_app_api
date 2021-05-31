@@ -7,5 +7,11 @@ class DetailPage extends StatefulWidget {
 
 class _DetailPage extends State<DetailPage> {
   @override
-  Widget build(BuildContext context) {}
+  Widget build(BuildContext context) {
+    return _initView();
+  }
+
+  Widget _initView() {
+    return Scaffold();
+  }
 }

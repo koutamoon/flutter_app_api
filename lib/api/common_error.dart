@@ -1,4 +1,6 @@
 class CommonError {
+  CommonError(this.statusCode, this.errorTitle, this.errorDescription);
+
   /// コード
   int statusCode;
 

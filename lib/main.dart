@@ -3,15 +3,15 @@ import 'package:flutter_app_api/view_detail/detail_page.dart';
 
 import 'view_top/top_page.dart';
 
-const String topPage = '/top';
-const String detailPage = '/detail';
+const String topRoute = '/top';
+const String detailRoute = '/detail';
 
 void main() {
   runApp(MaterialApp(
-    initialRoute: '/',
+    initialRoute: topRoute,
     routes: {
-      topPage: (context) => TopPage(),
-      detailPage: (context) => DetailPage(),
+      topRoute: (context) => TopPage(),
+      detailRoute: (context) => DetailPage(),
     },
   ));
 }
