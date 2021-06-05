@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_app_api/api/app_color.dart';
+import 'package:flutter_app_api/component/app_color.dart';
 import 'package:flutter_app_api/entity/pokemon_info.dart';
 import 'package:flutter_app_api/view_top/top_app_bar.dart';
 

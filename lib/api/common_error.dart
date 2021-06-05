@@ -1,4 +1,4 @@
-class CommonError {
+class CommonError implements Exception {
   CommonError(this.statusCode, this.errorTitle, this.errorDescription);
 
   /// コード
