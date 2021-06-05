@@ -13,10 +13,15 @@ class ApiClient {
   /// GET通信でResponseを取得する
   /// Parameter　[url]       　        パス
   /// Returns   [Map<String, Object>]　Response
-  Future<Map<String, Object>> _get(String url) async {
-    http.Response response = await http.get(url);
+  Future<Map<String, dynamic>> _get(String urlStr) async {
+    Uri? uri = Uri.tryParse(urlStr);
+    if (uri == null) {
+      // TODO(tsukimisato): HttpStatusごとにエラー内容を分ける
+      throw CommonError(404, '', 'エラーが起きました。');
+    }
+    http.Response response = await http.get(uri);
     if (response.statusCode == 200) {
-      Map<String, Object> responseBody = convert.jsonDecode(response.body);
+      Map<String, dynamic> responseBody = convert.jsonDecode(response.body);
       return responseBody;
     } else {
       // TODO(tsukimisato): HttpStatusごとにエラー内容を分ける
@@ -27,7 +32,7 @@ class ApiClient {
   /// ポケモンのリストをID順に20件、取得
   /// Return [PokemonsInfo] ポケモンのリスト20件
   Future<PokemonsInfo> getPokemonList() async {
-    final Map<String, Object> response = await _get(GET_POKEMON_LIST_PATH);
+    final Map<String, dynamic> response = await _get(GET_POKEMON_LIST_PATH);
     return PokemonsInfo.fromJson(response);
   }
 
@@ -36,7 +41,7 @@ class ApiClient {
   /// Returns   [PokemonInfo]　ポケモン情報
   Future<PokemonInfo> getPokemon(String parameter) async {
     final String path = GET_POKEMON_PATH.replaceAll('{pokemon}', parameter);
-    final Map<String, Object> response = await _get(path);
+    final Map<String, dynamic> response = await _get(path);
     return PokemonInfo.fromJson(response);
   }
 
@@ -44,7 +49,7 @@ class ApiClient {
   /// parameter [url] 　　　　　ポケモンの情報を取得するURL
   /// Returns   [PokemonInfo]　ポケモン情報
   Future<PokemonInfo> getPokemonByURL(String url) async {
-    final Map<String, Object> response = await _get(url);
+    final Map<String, dynamic> response = await _get(url);
     return PokemonInfo.fromJson(response);
   }
 }
