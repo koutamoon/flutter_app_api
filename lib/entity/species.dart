@@ -9,7 +9,7 @@ class Species {
   /// ポケモンの名前(英名)
   String? name;
 
-  /// url
+  /// url ex: https://pokeapi.co/api/v2/pokemon-species/1/
   String? url;
 
   factory Species.fromJson(Map<String, dynamic> json) => _$SpeciesFromJson(json);
