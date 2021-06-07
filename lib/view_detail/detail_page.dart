@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_app_api/component/app_color.dart';
+
+import 'detail_app_bar.dart';
 
 class DetailPage extends StatefulWidget {
   @override
@@ -12,6 +15,25 @@ class _DetailPage extends State<DetailPage> {
   }
 
   Widget _initView() {
-    return Scaffold();
+    return Scaffold(
+      backgroundColor: AppColor.BACKGROUND_COLOR,
+      appBar: DetailAppBar(),
+      body: SingleChildScrollView(
+        child: Column(
+          children: <Widget>[],
+        ),
+      ),
+    );
+  }
+
+  Widget _errorWidget() {
+    return Scaffold(
+        backgroundColor: AppColor.BACKGROUND_COLOR,
+        appBar: DetailAppBar(),
+        body: Center(
+          child: Container(
+            child: Text('エラー'),
+          ),
+        ));
   }
 }
