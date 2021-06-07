@@ -68,6 +68,7 @@ class _TopPage extends State<TopPage> {
       PokemonInfo? pokemonInfo = LocalStorage.share.getPokemonInfo(species.name!);
       if (pokemonInfo != null && pokemonInfo.id != null && pokemonInfo.name != null) {
         list.add(_getPokemonInformationCell(pokemonInfo));
+        list.add(Divider(color: Colors.blue));
       }
     });
     return list;
