@@ -3,6 +3,8 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_app_api/component/app_color.dart';
 import 'package:flutter_app_api/entity/pokemon_info.dart';
 import 'package:flutter_app_api/entity/pokemons_info.dart';
+import 'package:flutter_app_api/entity/species.dart';
+import 'package:flutter_app_api/storage/local_storage.dart';
 import 'package:flutter_app_api/view_top/top_app_bar.dart';
 import 'package:flutter_app_api/view_top/top_view_model.dart';
 
@@ -43,7 +45,7 @@ class _TopPage extends State<TopPage> {
       appBar: TopAppBar(),
       body: SingleChildScrollView(
         child: Column(
-          children: <Widget>[],
+          children: _pokemonListWidget(pokemonsInfo),
         ),
       ),
     );
@@ -60,8 +62,14 @@ class _TopPage extends State<TopPage> {
         ));
   }
 
-  List<Widget> _pokemonListWidget() {
-    List<Widget> list = <Widget>[];
+  List<Widget> _pokemonListWidget(PokemonsInfo pokemonsInfo) {
+    final List<Widget> list = <Widget>[];
+    pokemonsInfo.results.forEach((Species species) {
+      PokemonInfo? pokemonInfo = LocalStorage.share.getPokemonInfo(species.name!);
+      if (pokemonInfo != null && pokemonInfo.id != null && pokemonInfo.name != null) {
+        list.add(_getPokemonInformationCell(pokemonInfo));
+      }
+    });
     return list;
   }
 
@@ -79,7 +87,7 @@ class _TopPage extends State<TopPage> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               Text('ID: ${pokemonInfo.id}'),
-              Text('ID: ${pokemonInfo.name}'),
+              Text('名前: ${LocalStorage.share.getPokemonJaName(pokemonInfo.name!)}'),
             ],
           ))
         ],

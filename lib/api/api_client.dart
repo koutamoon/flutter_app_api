@@ -15,6 +15,7 @@ class ApiClient {
   /// Parameter　[url]       　        パス
   /// Returns   [Map<String, Object>]　Response
   Future<Map<String, dynamic>> _get(String urlStr) async {
+    print('call $urlStr');
     Uri? uri = Uri.tryParse(urlStr);
     if (uri == null) {
       // TODO(tsukimisato): HttpStatusごとにエラー内容を分ける
@@ -34,7 +35,11 @@ class ApiClient {
   /// Return [PokemonsInfo] ポケモンのリスト20件
   Future<PokemonsInfo> getPokemonList() async {
     final Map<String, dynamic> response = await _get(GET_POKEMON_LIST_PATH);
-    return PokemonsInfo.fromJson(response);
+    PokemonsInfo pokemonsInfo = PokemonsInfo.fromJson(response);
+    for (var species in pokemonsInfo.results) {
+      await getPokemonByURL(species.url!);
+    }
+    return pokemonsInfo;
   }
 
   /// ID・ポケモン名で指定したポケモン情報を取得

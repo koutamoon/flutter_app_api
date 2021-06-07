@@ -24,7 +24,7 @@ class PokemonInfo {
   int? weight;
 
   /// ポケモンの名称情報
-  Forms? forms;
+  List<Forms>? forms;
 
   /// ポケモンの名称情報
   Species? species;
@@ -33,7 +33,7 @@ class PokemonInfo {
   Sprites? sprites;
 
   /// タイプ情報
-  Types? types;
+  List<Types>? types;
 
   factory PokemonInfo.fromJson(Map<String, dynamic> json) => _$PokemonInfoFromJson(json);
 

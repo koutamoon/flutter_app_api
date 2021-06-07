@@ -10,18 +10,18 @@ PokemonInfo _$PokemonInfoFromJson(Map<String, dynamic> json) {
   return PokemonInfo(
     json['id'] as int?,
     json['name'] as String?,
-    json['forms'] == null
-        ? null
-        : Forms.fromJson(json['forms'] as Map<String, dynamic>),
+    (json['forms'] as List<dynamic>?)
+        ?.map((e) => Forms.fromJson(e as Map<String, dynamic>))
+        .toList(),
     json['species'] == null
         ? null
         : Species.fromJson(json['species'] as Map<String, dynamic>),
     json['sprites'] == null
         ? null
         : Sprites.fromJson(json['sprites'] as Map<String, dynamic>),
-    json['types'] == null
-        ? null
-        : Types.fromJson(json['types'] as Map<String, dynamic>),
+    (json['types'] as List<dynamic>?)
+        ?.map((e) => Types.fromJson(e as Map<String, dynamic>))
+        .toList(),
   )
     ..height = json['height'] as int?
     ..weight = json['weight'] as int?;
