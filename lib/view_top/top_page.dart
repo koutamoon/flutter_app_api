@@ -4,6 +4,7 @@ import 'package:flutter_app_api/component/app_color.dart';
 import 'package:flutter_app_api/entity/pokemon_info.dart';
 import 'package:flutter_app_api/entity/pokemons_info.dart';
 import 'package:flutter_app_api/entity/species.dart';
+import 'package:flutter_app_api/main.dart';
 import 'package:flutter_app_api/storage/local_storage.dart';
 import 'package:flutter_app_api/view_top/top_app_bar.dart';
 import 'package:flutter_app_api/view_top/top_view_model.dart';
@@ -71,26 +72,54 @@ class _TopPage extends State<TopPage> {
         list.add(Divider(color: Colors.blue));
       }
     });
+    list.add(_getPreviousAndNextButton(pokemonsInfo.previous != null, pokemonsInfo.next != null));
     return list;
   }
 
-  Container _getPokemonInformationCell(PokemonInfo pokemonInfo) {
+  GestureDetector _getPokemonInformationCell(PokemonInfo pokemonInfo) {
+    return GestureDetector(
+      child: Container(
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: <Widget>[
+            Image.network(pokemonInfo.sprites!.frontDefault!),
+            Padding(padding: EdgeInsets.only(left: 20)),
+            Expanded(
+                child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('ID: ${pokemonInfo.id}'),
+                Text('名前: ${LocalStorage.share.getPokemonJaName(pokemonInfo.name!)}'),
+              ],
+            ))
+          ],
+        ),
+      ),
+      onTap: () {
+        print('ID: ${pokemonInfo.id}');
+        print('名前: ${LocalStorage.share.getPokemonJaName(pokemonInfo.name!)}');
+        print('URL: ${pokemonInfo.species!.url}');
+        Navigator.pushNamed(context, detailRoute, arguments: pokemonInfo.species!.url);
+      },
+    );
+  }
+
+  Container _getPreviousAndNextButton(bool previous, bool next, {String? previousUrl, String? nextUrl}) {
     return Container(
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Image.network(pokemonInfo.sprites!.frontDefault!),
-          Padding(padding: EdgeInsets.only(left: 20)),
-          Expanded(
-              child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('ID: ${pokemonInfo.id}'),
-              Text('名前: ${LocalStorage.share.getPokemonJaName(pokemonInfo.name!)}'),
-            ],
-          ))
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: IconButton(icon: Icon(Icons.arrow_back), iconSize: 40, onPressed: previous ? () {} : null),
+          ),
+          Container(
+            margin: EdgeInsets.symmetric(horizontal: 20),
+            child: IconButton(icon: Icon(Icons.arrow_forward), iconSize: 40, onPressed: next ? () {} : null),
+          ),
         ],
       ),
     );
