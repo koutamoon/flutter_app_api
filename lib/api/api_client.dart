@@ -2,6 +2,7 @@ import 'dart:convert' as convert;
 
 import 'package:flutter_app_api/entity/pokemon_info.dart';
 import 'package:flutter_app_api/entity/pokemons_info.dart';
+import 'package:flutter_app_api/storage/local_storage.dart';
 import 'package:http/http.dart' as http;
 
 import 'common_error.dart';
@@ -42,7 +43,11 @@ class ApiClient {
   Future<PokemonInfo> getPokemon(String parameter) async {
     final String path = GET_POKEMON_PATH.replaceAll('{pokemon}', parameter);
     final Map<String, dynamic> response = await _get(path);
-    return PokemonInfo.fromJson(response);
+    PokemonInfo pokemonInfo = PokemonInfo.fromJson(response);
+    if (!LocalStorage.share.pokemonInfoMap.containsKey(pokemonInfo.name)) {
+      LocalStorage.share.addPokemonInfo(pokemonInfo);
+    }
+    return pokemonInfo;
   }
 
   /// URLで指定したポケモン情報を取得
@@ -50,6 +55,10 @@ class ApiClient {
   /// Returns   [PokemonInfo]　ポケモン情報
   Future<PokemonInfo> getPokemonByURL(String url) async {
     final Map<String, dynamic> response = await _get(url);
-    return PokemonInfo.fromJson(response);
+    PokemonInfo pokemonInfo = PokemonInfo.fromJson(response);
+    if (!LocalStorage.share.pokemonInfoMap.containsKey(pokemonInfo.name)) {
+      LocalStorage.share.addPokemonInfo(pokemonInfo);
+    }
+    return pokemonInfo;
   }
 }

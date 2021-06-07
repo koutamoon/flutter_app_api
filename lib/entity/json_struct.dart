@@ -9,4 +9,8 @@ class JsonStruct {
   String ja;
 
   String en;
+
+  factory JsonStruct.fromJson(Map<String, dynamic> json) => _$JsonStructFromJson(json);
+
+  Map<String, dynamic> toJson() => _$JsonStructToJson(this);
 }

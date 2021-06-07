@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_app_api/component/app_color.dart';
 import 'package:flutter_app_api/entity/pokemon_info.dart';
 import 'package:flutter_app_api/entity/pokemons_info.dart';
@@ -59,7 +60,30 @@ class _TopPage extends State<TopPage> {
         ));
   }
 
+  List<Widget> _pokemonListWidget() {
+    List<Widget> list = <Widget>[];
+    return list;
+  }
+
   Container _getPokemonInformationCell(PokemonInfo pokemonInfo) {
-    return Container();
+    return Container(
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Image.network(pokemonInfo.sprites!.frontDefault!),
+          Padding(padding: EdgeInsets.only(left: 20)),
+          Expanded(
+              child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text('ID: ${pokemonInfo.id}'),
+              Text('ID: ${pokemonInfo.name}'),
+            ],
+          ))
+        ],
+      ),
+    );
   }
 }
