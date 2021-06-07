@@ -28,9 +28,9 @@ class LocalStorage {
 
   Future<void> parsePokemonNameList() async {
     String jsonStr = await rootBundle.loadString('json/pokemon_name_ja.json');
-    List<Map<String, String>> jsonMap = jsonDecode(jsonStr);
-    jsonMap.forEach((Map<String, String> e) {
-      _pokemonNameList.add(JsonStruct.fromJson(e));
+    List<dynamic> jsonMap = jsonDecode(jsonStr);
+    jsonMap.forEach((e) {
+      _pokemonNameList.add(JsonStruct.fromJson(e as Map<String, dynamic>));
     });
   }
 
@@ -43,7 +43,7 @@ class LocalStorage {
   String getPokemonJaName(String pokemonEnName) {
     String? pokemonJaName;
     _pokemonNameList.forEach((JsonStruct pokemonName) {
-      if (pokemonName.en == pokemonEnName) {
+      if (pokemonName.en.toLowerCase() == pokemonEnName.toLowerCase()) {
         pokemonJaName = pokemonName.ja;
         return;
       }

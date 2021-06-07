@@ -34,6 +34,7 @@ class ApiClient {
   /// ポケモンのリストをID順に20件、取得
   /// Return [PokemonsInfo] ポケモンのリスト20件
   Future<PokemonsInfo> getPokemonList() async {
+    await LocalStorage.share.parsePokemonNameList();
     final Map<String, dynamic> response = await _get(GET_POKEMON_LIST_PATH);
     PokemonsInfo pokemonsInfo = PokemonsInfo.fromJson(response);
     for (var species in pokemonsInfo.results) {
