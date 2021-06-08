@@ -17,6 +17,10 @@ class LocalStorage {
 
   List<JsonStruct> get pokemonNameList => _pokemonNameList;
 
+  List<JsonStruct> _pokemonTypeList = <JsonStruct>[];
+
+  List<JsonStruct> get pokemonTypeList => _pokemonTypeList;
+
   Map<String, PokemonInfo> _pokemonInfoMap = <String, PokemonInfo>{};
 
   Map<String, PokemonInfo> get pokemonInfoMap => _pokemonInfoMap;
@@ -26,11 +30,16 @@ class LocalStorage {
     _pokemonInfoMap = <String, PokemonInfo>{};
   }
 
-  Future<void> parsePokemonNameList() async {
-    String jsonStr = await rootBundle.loadString('json/pokemon_name_ja.json');
-    List<dynamic> jsonMap = jsonDecode(jsonStr);
-    jsonMap.forEach((e) {
+  Future<void> parsePokemonInfoJson() async {
+    String pokemonNameJsonStr = await rootBundle.loadString('json/pokemon_name_ja.json');
+    List<dynamic> pokemonNameJsonMap = jsonDecode(pokemonNameJsonStr);
+    pokemonNameJsonMap.forEach((e) {
       _pokemonNameList.add(JsonStruct.fromJson(e as Map<String, dynamic>));
+    });
+    String pokemonTypeJsonStr = await rootBundle.loadString('json/type_ja.json');
+    List<dynamic> pokemonTypeJsonMap = jsonDecode(pokemonTypeJsonStr);
+    pokemonTypeJsonMap.forEach((e) {
+      _pokemonTypeList.add(JsonStruct.fromJson(e as Map<String, dynamic>));
     });
   }
 
@@ -49,6 +58,17 @@ class LocalStorage {
       }
     });
     return pokemonJaName ?? pokemonEnName;
+  }
+
+  String getPokemonJaType(String pokemonEnType) {
+    String? pokemonJaType;
+    _pokemonTypeList.forEach((JsonStruct pokemonType) {
+      if (pokemonType.en.toLowerCase() == pokemonEnType.toLowerCase()) {
+        pokemonJaType = pokemonType.ja;
+        return;
+      }
+    });
+    return pokemonJaType ?? pokemonEnType;
   }
 
   void addPokemonInfo(PokemonInfo pokemonInfo) {

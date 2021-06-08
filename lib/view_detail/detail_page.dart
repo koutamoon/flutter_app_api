@@ -28,7 +28,6 @@ class _DetailPage extends State<DetailPage> {
     if (argumentList.length != 2) {
       return _errorWidget();
     }
-
     return FutureBuilder(
         future: _detailViewModel.getPokemonInfo(argumentList[0], argumentList[1]),
         builder: (context, snapshot) {

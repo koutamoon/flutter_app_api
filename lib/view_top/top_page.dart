@@ -101,7 +101,7 @@ class _TopPage extends State<TopPage> {
         print('ID: ${pokemonInfo.id}');
         print('名前: ${LocalStorage.share.getPokemonJaName(pokemonInfo.name!)}');
         print('URL: ${pokemonInfo.species!.url}');
-        Navigator.pushNamed(context, detailRoute, arguments: [pokemonInfo.name!, pokemonInfo.species!.url]);
+        Navigator.pushNamed(context, detailRoute, arguments: <String>[pokemonInfo.name!, pokemonInfo.species!.url!]);
       },
     );
   }
