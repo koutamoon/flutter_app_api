@@ -9,6 +9,7 @@ import 'package:flutter_app_api/storage/local_storage.dart';
 import 'package:flutter_app_api/view_top/top_app_bar.dart';
 import 'package:flutter_app_api/view_top/top_view_model.dart';
 
+/// TOP画面
 class TopPage extends StatefulWidget {
   @override
   _TopPage createState() => _TopPage();

@@ -7,6 +7,7 @@ import 'package:flutter_app_api/view_detail/detail_view_model.dart';
 
 import 'detail_app_bar.dart';
 
+/// ポケモン詳細画面
 class DetailPage extends StatefulWidget {
   @override
   _DetailPage createState() => _DetailPage();

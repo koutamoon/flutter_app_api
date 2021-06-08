@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// ポケモン詳細画面のAppBar(header)
 class DetailAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {

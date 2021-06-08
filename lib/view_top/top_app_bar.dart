@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+/// TOP画面のAppBar(header)
 class TopAppBar extends StatelessWidget with PreferredSizeWidget {
   @override
   Widget build(BuildContext context) {

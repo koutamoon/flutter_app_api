@@ -2,13 +2,16 @@ import 'package:flutter_app_api/api/api_client.dart';
 import 'package:flutter_app_api/api/common_error.dart';
 import 'package:flutter_app_api/entity/pokemons_info.dart';
 
+/// TOP画面のviewModel
 class TopViewModel {
   TopViewModel() : _apiClient = ApiClient();
 
   final ApiClient _apiClient;
 
+  /// ポケモンの簡易情報リスト
   PokemonsInfo? _pokemonsInfo;
 
+  /// _pokemonsInfoのgetter
   PokemonsInfo? get pokemonsInfo => _pokemonsInfo;
 
   Future<void> getPokemonList() async {
