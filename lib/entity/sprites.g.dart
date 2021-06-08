@@ -16,13 +16,9 @@ Sprites _$SpritesFromJson(Map<String, dynamic> json) {
     json['front_female'] as String?,
     json['front_shiny'] as String?,
     json['front_shiny_female'] as String?,
-    json['dream_World'] == null
+    json['other'] == null
         ? null
-        : DreamWorld.fromJson(json['dream_World'] as Map<String, dynamic>),
-    json['officialArtwork'] == null
-        ? null
-        : OfficialArtwork.fromJson(
-            json['officialArtwork'] as Map<String, dynamic>),
+        : Other.fromJson(json['other'] as Map<String, dynamic>),
   );
 }
 
@@ -35,6 +31,5 @@ Map<String, dynamic> _$SpritesToJson(Sprites instance) => <String, dynamic>{
       'front_female': instance.frontFemale,
       'front_shiny': instance.frontShiny,
       'front_shiny_female': instance.frontShinyFemale,
-      'dream_World': instance.dreamWorld,
-      'officialArtwork': instance.officialArtwork,
+      'other': instance.other,
     };

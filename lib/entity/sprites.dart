@@ -1,14 +1,13 @@
 import 'package:json_annotation/json_annotation.dart';
 
-import 'dream_world.dart';
-import 'official_artwork.dart';
+import 'other.dart';
 
 part 'sprites.g.dart';
 
 @JsonSerializable()
 class Sprites {
   Sprites(this.backDefault, this.backFemale, this.backShiny, this.backShinyFemale, this.frontDefault, this.frontFemale,
-      this.frontShiny, this.frontShinyFemale, this.dreamWorld, this.officialArtwork);
+      this.frontShiny, this.frontShinyFemale, this.other);
 
   ///　後画像(オス)
   @JsonKey(name: 'back_default')
@@ -42,10 +41,8 @@ class Sprites {
   @JsonKey(name: 'front_shiny_female')
   String? frontShinyFemale;
 
-  @JsonKey(name: 'dream_World')
-  DreamWorld? dreamWorld;
-
-  OfficialArtwork? officialArtwork;
+  @JsonKey(name: 'other')
+  Other? other;
 
   factory Sprites.fromJson(Map<String, dynamic> json) => _$SpritesFromJson(json);
 
